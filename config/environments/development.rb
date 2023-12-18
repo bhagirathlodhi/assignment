@@ -72,5 +72,16 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Raise error when a before_action's only/except options reference missing actions
+
+  Rails.configuration.stripe = {
+    publishable_key: ENV['STRIPE_PUBLISHABLE_KEY'],
+    secret_key: ENV['STRIPE_SECRET_KEY']
+  }
+  Stripe.api_key = Rails.configuration.stripe[:secret_key]
   config.action_controller.raise_on_missing_callback_actions = true
+  config.hosts << "094d-2405-201-3027-e801-9231-6e2b-1b9c-51fa.ngrok-free.app"
+
+  # Store files locally.  
+  config.active_storage.service = :local
+
 end
