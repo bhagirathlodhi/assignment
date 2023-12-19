@@ -23,6 +23,17 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to category_product_path(@product)
+      flash[:success] = 'product Updated successfully .'
+    else
+      render :edit, status: :unprocessable_entity
+      flash.now[:alert] = 'Something went wrong!'
+    end
+  end
+
   def show
     @product = Product.find(params[:id])
   end

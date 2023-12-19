@@ -4,9 +4,7 @@
       <div>
         <%= form.label :name %><br>
         <%= form.text_field :name, class:"form-control" %>
-        <% category.errors.full_messages_for(:name) do |message|%>
-          <div><%= message %></div>
-        <% end %>
+        <%= render 'shared/error_messages', object: form.object %>
       </div>
 
       <div>

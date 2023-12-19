@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.create(category_params)
+    @category = current_user.categories.create(category_params)
     if @category.save
       redirect_to root_path
       flash[:success] = 'Category Lounched successfully .'
