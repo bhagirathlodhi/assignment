@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-
   devise_for :users
+
 
   
   root "categories#index"
@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   end
 
   resources :bookings, only: [:my_bookings, :show, :create]
+  post "/payment_completed", to: "bookings#payment_completed"
 end

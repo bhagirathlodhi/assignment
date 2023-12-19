@@ -1,6 +1,4 @@
 class CategoriesController < ApplicationController
-  # before_action :admin?, only: [:new, :create, :edit, :update]
-
   def index
     @categories = Category.all
   end

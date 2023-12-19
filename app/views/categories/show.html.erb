@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<% if user_signed_in? && current_user.admin?%>
+<% if user_signed_in? && current_user.seller?%>
   <div class="row mt-5">
     <div class="col-md-3 ms-auto">
       <%= link_to "create new product", new_category_product_path(@category), class:"btn btn-outline-dark" %>

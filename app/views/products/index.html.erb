@@ -22,10 +22,15 @@
   </div>
 </div>
 
-<% if user_signed_in? && current_user.admin?%>
   <div class="row mt-5">
     <div class="col-md-3 ms-auto">
-      <%= link_to "create new product", new_category_product_path(@category), class:"btn btn-outline-dark" %>
+      <% if user_signed_in? && current_user.seller? %>
+        <%= link_to "create new product", new_category_product_path(@category), class:"btn btn-outline-dark" %>
+        <%= link_to "Back", root_path , class:"btn btn-outline-dark"%>
+      <% else %>
+        <%= link_to "Back", root_path , class:"btn btn-outline-dark"%>
+      <% end %>
     </div>
   </div>
-<% end %>
+
+

@@ -16,7 +16,7 @@
         </div>
       <% end %>
     </div>
-    <% if user_signed_in? && current_user.admin? %>
+    <% if user_signed_in? && current_user.seller? %>
       <%= link_to "Add new category", new_category_path, class:"btn btn-secondary mt-4" %>
     <% end %>
   </div>

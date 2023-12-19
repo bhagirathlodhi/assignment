@@ -1,5 +1,8 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
+  # skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!, except: :payment_completed
+  
   def my_bookings
   end
 
@@ -9,14 +12,12 @@ class BookingsController < ApplicationController
       @product = Product.find(params[:product_id])
       total_amount = @product.price * params[:no_of_product].to_i
 
-      session = Stripe::Checkout::Session.create({
+      session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         metadata: {
-  
-        product_id: @product.id,
-        no_of_product: params[:no_of_product],
-        user_id: current_user.id
-           
+          product_id: @product.id,
+          no_of_product: params[:no_of_product],
+          user_id: current_user.id
         },
         line_items: [{
           price_data: {
@@ -31,20 +32,22 @@ class BookingsController < ApplicationController
         mode: 'payment',
         success_url: "#{root_url}/show/bookings",
         cancel_url: root_url
-      })
+      )
+
       flash[:success] = "You have successfully book & you will get mail with all details"
 
       redirect_to session.url, allow_other_host: true
-      
+  
     rescue Exception => e
-      e.class 
+      e.class
     end
   end  
 
   def payment_completed
+    debugger
     payload= request.body.read
     event= nil
-    endpoint_secret= 'whsec_euswy4FLNFdMlQi2aluYJkR2i6854ib1'
+    endpoint_secret= 'whsec_WGB0M9OX7WwLOsgkaalM7gcYvxO0mSU3'
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -60,7 +63,7 @@ class BookingsController < ApplicationController
       @user= session.metadata.user_id
       @product_id = session.metadata.product_id
       @no_of_product = session.metadata.no_of_product
-      @booking = Booking.create(no_of_tickets: @no_of_product, product_id: @product_id, user_id: @user)
+      @booking = Booking.create(no_of_product: @no_of_product, product_id: @product_id, user_id: @user)
       # BookingsMailer.success_booking(@booking).deliver_now
     end
   end

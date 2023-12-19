@@ -1,9 +1,13 @@
 source "https://rubygems.org"
 
 ruby "2.7.4"
+gem 'sass-rails'
+
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.2"
+gem 'cancancan', '~> 3.5'
+gem 'activeadmin'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
