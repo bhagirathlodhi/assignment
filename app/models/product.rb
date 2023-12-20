@@ -8,4 +8,7 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :cover_image, presence: true
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["category_id", "cover_image", "created_at", "description", "id", "id_value", "name", "price", "quantity", "remaining_products", "updated_at", "user_id"]
+  end
 end

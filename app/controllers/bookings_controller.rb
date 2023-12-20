@@ -1,18 +1,18 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  # skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!, except: :payment_completed
   
   def my_bookings
+    @bookings = current_user.bookings
   end
 
   def create
-    debugger
     begin
       @product = Product.find(params[:product_id])
       total_amount = @product.price * params[:no_of_product].to_i
 
-      session = Stripe::Checkout::Session.create(
+      session = Stripe::Checkout::Session.create({
         payment_method_types: ['card'],
         metadata: {
           product_id: @product.id,
@@ -30,24 +30,20 @@ class BookingsController < ApplicationController
           quantity: 1,
         }],
         mode: 'payment',
-        success_url: "#{root_url}/show/bookings",
+        success_url: "#{root_url}/my_bookings",
         cancel_url: root_url
-      )
-
+        })
       flash[:success] = "You have successfully book & you will get mail with all details"
-
       redirect_to session.url, allow_other_host: true
-  
     rescue Exception => e
       e.class
     end
   end  
 
   def payment_completed
-    debugger
     payload= request.body.read
     event= nil
-    endpoint_secret= 'whsec_WGB0M9OX7WwLOsgkaalM7gcYvxO0mSU3'
+    endpoint_secret= 'whsec_M2OzrpZHUWIPvbicdEE6wqJqGWhwcUPo'
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -77,3 +73,5 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:no_of_product).merge(product_id: params[:booking][:product_id])
   end
 end
+
+

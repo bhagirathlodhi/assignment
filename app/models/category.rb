@@ -6,4 +6,8 @@ class Category < ApplicationRecord
   validates :cat_image, presence: true
   validates :name, presence: true
 
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["cat_image", "created_at", "id", "id_value", "name", "updated_at", "user_id"]
+  end
 end

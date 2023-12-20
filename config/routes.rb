@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :products 
   end
 
-  resources :bookings, only: [:my_bookings, :show, :create]
+  resources :bookings, only: [:show, :create]
+  get "/my_bookings", to: "bookings#my_bookings"
   post "/payment_completed", to: "bookings#payment_completed"
 end

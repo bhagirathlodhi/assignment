@@ -81,7 +81,7 @@ Rails.application.configure do
 
   
   config.action_controller.raise_on_missing_callback_actions = true
-  config.hosts << "fe7e-2405-201-3027-e801-544d-4d48-4527-45a3.ngrok-free.app"
+  config.hosts << "085b-2405-201-3027-e801-3425-eba9-5d5d-1bfd.ngrok-free.app"
 
   # Store files locally.  
   config.active_storage.service = :local
