@@ -6,8 +6,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <% if user_signed_in? %>
+        <% if user_signed_in? &&  current_user.seller? || user_signed_in? && current_user.admin? %>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="<%= root_path%>"><i class="bi bi-house-door"></i></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person"></i><%= current_user.name %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><%= button_to "Log Out", destroy_user_session_path, class: "dropdown-item", method: :delete %></li>
+              <li><%= button_to "Update profile", edit_user_registration_path, class: "dropdown-item", method: :delete %></li>
+            </ul>
+          </li>
+        <% elsif user_signed_in? && current_user.customer? %>
+        <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="<%= root_path%>"><i class="bi bi-house-door"></i></a>
           </li>
           <li class="nav-item">

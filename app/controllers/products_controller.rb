@@ -1,7 +1,9 @@
 class ProductsController < ApplicationController
   def index
     @category = Category.find(params[:category_id])
-    @products = @category.products.all
+    # @category_products = @category.products.all
+    @products = current_user.products.where(category: @category)
+
   end
 
   def new
@@ -12,7 +14,7 @@ class ProductsController < ApplicationController
     @product = current_user.products.new(product_params)
     @product.category_id = params[:category_id]
     if @product.save
-      redirect_to category_path(@product.category_id)
+      redirect_to category_products_path
       flash[:success] = 'Product Lounched successfully .'
     else
       render :new
