@@ -12,3 +12,20 @@ class Product < ApplicationRecord
     ["category_id", "cover_image", "created_at", "description", "id", "id_value", "name", "price", "quantity", "remaining_products", "updated_at", "user_id"]
   end
 end
+
+
+# class User < ApplicationRecord
+#   has_many :bookings, dependent: :destroy
+#   has_many :products, through: :bookings
+# end
+
+# class Product < ApplicationRecord
+#   belongs_to :category
+#   has_many :bookings, dependent: :destroy
+#   has_many :users, through: :bookings
+# end
+
+# class Booking < ApplicationRecord
+#   belongs_to :user
+#   belongs_to :product
+# end

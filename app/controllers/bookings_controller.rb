@@ -30,7 +30,7 @@ class BookingsController < ApplicationController
           quantity: 1,
         }],
         mode: 'payment',
-        success_url: "#{root_url}/my_bookings",
+        success_url: "#{root_url}my_bookings",
         cancel_url: root_url
         })
       flash[:success] = "You have successfully book & you will get mail with all details"
