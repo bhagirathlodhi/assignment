@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   def index
     @category = Category.find(params[:category_id])
-    if current_user.seller? 
+    if user_signed_in? && current_user.seller? 
       @products = current_user.products.where(category: @category)
     else
       @products = @category.products.all
