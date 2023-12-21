@@ -9,6 +9,13 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :role)}
       devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password)}
     end
+  private
+
+    def authenticate_admin!
+      unless current_user&.admin?
+        redirect_to root_path, alert: 'You are not authorized to perform this action.'
+      end
+    end
 end
 
 

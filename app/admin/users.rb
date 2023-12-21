@@ -1,26 +1,38 @@
 ActiveAdmin.register User do
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :name, :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :admin, :role
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :admin, :role]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  index do
+    selectable_column
+    id_column
+    column :email
+    column :blocked
+    actions do |user|
+      item "Block", block_admin_user_path(user), method: :put unless user.blocked?
+      item "Unblock", unblock_admin_user_path(user), method: :put if user.blocked?
+    end
+  end
 
-  #app/admin/clients.rb
+  member_action :block, method: :put do
+    resource.update(blocked: true)
+    redirect_to admin_users_path, notice: "User blocked!"
+  end
+
+  member_action :unblock, method: :put do
+    resource.update(blocked: false)
+    redirect_to admin_users_path, notice: "User unblocked!"
+  end
 
   ActiveAdmin.register User do
     actions :index, :edit, :update, :create, :destroy
 
-    permit_params :name, :email
+    permit_params :name, :email, :status
+
+    form do |f|
+      f.inputs 'User Details' do
+        
+        f.input :status, label: 'Blocked'
+      end
+      f.actions
+    end
   end
   
 end

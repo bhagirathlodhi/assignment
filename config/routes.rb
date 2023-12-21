@@ -6,7 +6,17 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  
+  # devise_for :users, controllers: {
+  #   registrations: 'registrations'
+  # }
+  namespace :admin do
+    resources :users do
+      member do
+        put 'block'
+        put 'unblock'
+      end
+    end
+  end
 
 
   root "categories#index"

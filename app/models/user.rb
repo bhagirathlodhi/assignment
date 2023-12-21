@@ -10,7 +10,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role: {customer: 0, seller: 1, admin: 3}
-  
+
+  enum status: { unblocked: 0, blocked: 1 }
+
 
 
 
@@ -19,8 +21,11 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "email", "encrypted_password", "id", "id_value", "name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "role", "updated_at", "blocked"]
+    ["created_at", "email", "encrypted_password", "id", "id_value", "name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "role", "updated_at", "status"]
   end
 
+  # def blocked?
+  #   blocked?
+  # end
 
 end
