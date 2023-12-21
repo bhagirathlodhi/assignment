@@ -3,24 +3,19 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   # @request.env["devise.mapping"] = Devise.mappings[:user]
-  devise_for :users
-  before do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-  end
-  
- 
-  devise_scope :user do
-    get "/some/route" => "some_devise_controller"
-  end
-  
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+  # resources :users, only: [:index]
 
   namespace :users do
     resources :registrations, only: [:index]
   end
 
-  namespace :users do
-    devise_for :users, controllers: { registrations: 'users/registrations' }
-  end
+  # namespace :users do
+  #   devise_for :users, controllers: { registrations: 'users/registrations' }
+  # end
   
   
 
