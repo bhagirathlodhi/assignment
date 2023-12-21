@@ -4,18 +4,7 @@ Rails.application.routes.draw do
 
   # @request.env["devise.mapping"] = Devise.mappings[:user]
 
-  devise_for :users, controllers: {
-    registrations: 'users/registrations'
-  }
-  # resources :users, only: [:index]
-
-  namespace :users do
-    resources :registrations, only: [:index]
-  end
-
-  # namespace :users do
-  #   devise_for :users, controllers: { registrations: 'users/registrations' }
-  # end
+  devise_for :users
   
   
 

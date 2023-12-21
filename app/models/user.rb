@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :categories, dependent: :destroy
 
-  validates_inclusion_of :blocked, in: [true, false]
+  # validates_inclusion_of :blocked, in: [true, false]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
