@@ -16,7 +16,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><%= button_to "Log Out", destroy_user_session_path, class: "dropdown-item", method: :delete %></li>
-              <li><%= button_to "Update profile", edit_user_registration_path, class: "dropdown-item", method: :delete %></li>
+              <li><a class="dropdown-item" href="<%= edit_user_registration_path %>">Update profile</a></li>
             </ul>
           </li>
         <% elsif user_signed_in? && current_user.customer? %>
@@ -32,7 +32,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><%= button_to "Log Out", destroy_user_session_path, class: "dropdown-item", method: :delete %></li>
-              <li><%= button_to "Update profile", edit_user_registration_path, class: "dropdown-item", method: :delete %></li>
+              <li><a class="dropdown-item" href="<%= edit_user_registration_path %>">Update profile</a></li>
             </ul>
           </li>
         <% else %>

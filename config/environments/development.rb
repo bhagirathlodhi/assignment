@@ -79,11 +79,13 @@ Rails.application.configure do
   }
   Stripe.api_key = Rails.configuration.stripe[:secret_key]
 
-  
   config.action_controller.raise_on_missing_callback_actions = true
-  config.hosts << "085b-2405-201-3027-e801-3425-eba9-5d5d-1bfd.ngrok-free.app"
-
+  config.hosts << "32a1-2405-201-3027-e801-5684-1c72-48ce-e6db.ngrok-free.app"
+  # config.hosts << "32a1-2405-201-3027-e801-5684-1c72-48ce-e6db.ngrok-free.app"
   # Store files locally.  
   config.active_storage.service = :local
+  config.action_mailer.delivery_method = :letter_opener_web
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => "localhost:3000" }
 
 end

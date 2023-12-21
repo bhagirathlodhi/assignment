@@ -129,6 +129,8 @@ GEM
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
+    faker (3.2.2)
+      i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
@@ -173,6 +175,15 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
+    letter_opener_web (2.0.0)
+      actionmailer (>= 5.2)
+      letter_opener (~> 1.7)
+      railties (>= 5.2)
+      rexml
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -334,9 +345,11 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   dotenv-rails (~> 2.8, >= 2.8.1)
+  faker
   image_processing (~> 1.12, >= 1.12.2)
   jbuilder
   jsbundling-rails
+  letter_opener_web
   puma (>= 5.0)
   rails (~> 7.1.2)
   redis (>= 4.0.1)

@@ -24,8 +24,4 @@ class User < ApplicationRecord
     ["created_at", "email", "encrypted_password", "id", "id_value", "name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "role", "updated_at", "blocked"]
   end
 
-  def is_blocked?
-    blocked
-  end
-
 end

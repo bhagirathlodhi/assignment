@@ -43,7 +43,7 @@ class BookingsController < ApplicationController
   def payment_completed
     payload= request.body.read
     event= nil
-    endpoint_secret= 'whsec_M2OzrpZHUWIPvbicdEE6wqJqGWhwcUPo'
+    endpoint_secret= 'whsec_vSBfcUvgM67EfAiIFNvMJLZOnOEWlcsd'
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
