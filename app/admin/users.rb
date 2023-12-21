@@ -4,6 +4,7 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :email
+    column :role
     column :blocked
     actions do |user|
       item "Block", block_admin_user_path(user), method: :put unless user.blocked?
@@ -21,18 +22,4 @@ ActiveAdmin.register User do
     redirect_to admin_users_path, notice: "User unblocked!"
   end
 
-  ActiveAdmin.register User do
-    actions :index, :edit, :update, :create, :destroy
-
-    permit_params :name, :email, :status
-
-    form do |f|
-      f.inputs 'User Details' do
-        
-        f.input :status, label: 'Blocked'
-      end
-      f.actions
-    end
-  end
-  
 end

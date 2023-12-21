@@ -2,13 +2,11 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  # @request.env["devise.mapping"] = Devise.mappings[:user]
 
-  devise_for :users
-  
-  # devise_for :users, controllers: {
-  #   registrations: 'registrations'
-  # }
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+
   namespace :admin do
     resources :users do
       member do
@@ -20,6 +18,7 @@ Rails.application.routes.draw do
 
 
   root "categories#index"
+
   resources :categories do
     resources :products 
   end

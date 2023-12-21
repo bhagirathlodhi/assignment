@@ -11,8 +11,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum role: {customer: 0, seller: 1, admin: 3}
 
-  enum status: { unblocked: 0, blocked: 1 }
 
+  attribute :blocked, default: false
 
 
 
@@ -21,11 +21,11 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "email", "encrypted_password", "id", "id_value", "name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "role", "updated_at", "status"]
+    ["created_at", "email", "encrypted_password", "id", "id_value", "name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "role", "updated_at", "blocked"]
   end
 
-  # def blocked?
-  #   blocked?
-  # end
+  def is_blocked?
+    blocked
+  end
 
 end
