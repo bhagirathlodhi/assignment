@@ -43,7 +43,7 @@ class BookingsController < ApplicationController
   def payment_completed
     payload= request.body.read
     event= nil
-    endpoint_secret= 'whsec_vSBfcUvgM67EfAiIFNvMJLZOnOEWlcsd'
+    endpoint_secret= 'whsec_uCJ7svKTJIBJIrGcF116IC2jGu8XVTSS'
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -60,7 +60,7 @@ class BookingsController < ApplicationController
       @product_id = session.metadata.product_id
       @no_of_product = session.metadata.no_of_product
       @booking = Booking.create(no_of_product: @no_of_product, product_id: @product_id, user_id: @user)
-      # BookingsMailer.success_booking(@booking).deliver_now
+      BookingsMailer.success_booking(@booking).deliver_now
     end
   end
 

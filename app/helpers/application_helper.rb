@@ -8,11 +8,11 @@ module ApplicationHelper
     end
   end
 
-  # def check_admin_role
-  #   unless current_user.admin?
-  #     redirect_to root_path, alert: 'You do not have permission to perform this action.'
-  #   end
-  # end
+  def check_admin_role
+    unless current_user.admin?
+      redirect_to root_path, alert: 'You do not have permission'
+    end
+  end
 
 end
 

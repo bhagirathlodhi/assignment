@@ -5,11 +5,10 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def check_blocked
-    debugger
     user = User.find_by(email: params[:user][:email])
 
     if user && user.blocked?
-      redirect_to new_user_session_path, alert: 'Your account is blocked. Please contact the admin.'
+      redirect_to new_user_session_path, alert: 'Your account is blocked. Please contact to admin.'
     end
   end
 end
