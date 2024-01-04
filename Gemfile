@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.7.4"
+ruby "3.2.2"
 gem 'sass-rails'
 
 
@@ -58,6 +58,9 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
   gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
   gem 'byebug', '~> 11.1', '>= 11.1.3'
+  gem 'rspec-rails', '~> 6.1.0'
+  gem 'factory_bot_rails', '~> 6.4', '>= 6.4.3'
+  gem 'shoulda-matchers', '~> 6.0'
 end
 
 group :development do
